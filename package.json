@@ -1,0 +1,66 @@
+{
+  "name": "ccscan",
+  "description": "Scan files for credit card numbers",
+  "version": "1.0.0",
+  "author": "Neo Financial Engineering <engineering@neofinancial.com>",
+  "license": "MIT",
+  "main": "build/app.js",
+  "bin": {
+    "ccscan": "bin/ccscan.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neofinancial/ccscan"
+  },
+  "engines": {
+    "node": ">=8.3.0"
+  },
+  "scripts": {
+    "start": "./bin/ccscan.js",
+    "watch": "tsc -w",
+    "build": "tsc",
+    "clean": "rimraf build",
+    "test": "NODE_ENV=test jest",
+    "lint": "eslint \"**/*.{ts,js}\"",
+    "format": "prettier --write \"**/*.{ts,js,json,yaml,yml,md}\"",
+    "format:check": "prettier --debug-check \"**/*.{ts,js,json,yaml,yml,md}\""
+  },
+  "files": [
+    "bin",
+    "build"
+  ],
+  "lint-staged": {
+    "*.{ts,js}": [
+      "eslint --max-warnings 100",
+      "git add"
+    ],
+    "*.{ts,js,json,yaml,yml,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "fast-luhn": "^1.0.4",
+    "globby": "^10.0.1",
+    "line-reader": "^0.4.0",
+    "yargs": "^14.2.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.20",
+    "@types/line-reader": "^0.0.28",
+    "@types/node": "^12.11.7",
+    "@types/yargs": "^13.0.3",
+    "eslint": "^5.16.0",
+    "eslint-config-neo": "~0.3.3",
+    "husky": "^3.0.8",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.4.2",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "strip-ansi": "^5.2.0",
+    "ts-jest": "^24.1.0",
+    "ts-node": "^8.4.1",
+    "typescript": "~3.5.3"
+  }
+}
