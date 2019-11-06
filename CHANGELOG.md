@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 (November 6, 2019)
+
+Modified `scanFiles` function to return a list of file names where credit card numbers are found.
+
 ## 1.0.0 (October 29, 2019)
 
 Initial release! :tada:
