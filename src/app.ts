@@ -105,9 +105,9 @@ const scanFile = async (fileName: string, args: Args): Promise<boolean> => {
   }
 };
 
-const scanFiles = async (args: Args): Promise<boolean> => {
+const scanFiles = async (args: Args): Promise<string[]> => {
   const mergedArgs = { ...defaultArgs, ...args };
-  let found = false;
+  const found = [];
 
   try {
     const pattern = [mergedArgs.files, '!node_modules'];
@@ -121,7 +121,7 @@ const scanFiles = async (args: Args): Promise<boolean> => {
 
     for (const fileName of files) {
       if (await scanFile(fileName, mergedArgs)) {
-        found = true;
+        found.push(fileName);
       }
     }
 
@@ -149,7 +149,7 @@ const run = async (): Promise<void> => {
           type: 'string'
         }),
       handler: async (args: Args): Promise<void> => {
-        if (await scanFiles(args)) {
+        if ((await scanFiles(args)).length > 0) {
           process.exit(1);
         }
       }
