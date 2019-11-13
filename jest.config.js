@@ -1,5 +1,11 @@
 module.exports = {
-  collectCoverageFrom: ['src/**/*.{ts,js}', '!<rootDir>/node_modules/', '!<rootDir>/build/', '!<rootDir>/*.js'],
+  collectCoverageFrom: [
+    'src/**/*.{ts,js}',
+    '!<rootDir>/node_modules/',
+    '!<rootDir>/build/',
+    '!<rootDir>/dist/',
+    '!<rootDir>/*.js'
+  ],
   globals: {
     'ts-jest': {
       tsConfig: '<rootDir>/test/tsconfig.json'
@@ -7,5 +13,5 @@ module.exports = {
   },
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['<rootDir>/build/', '<rootDir>/config.*.js']
+  testPathIgnorePatterns: ['<rootDir>/build/', '<rootDir>/dist/', '<rootDir>/config.*.js']
 };

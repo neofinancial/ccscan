@@ -2,6 +2,6 @@
 
 /* eslint-disable node/shebang */
 
-const cli = require('../build/app');
+const cli = require('../build');
 
 cli.run();

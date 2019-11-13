@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2 (November 13, 2019)
+
+- Build with @zeit/ncc for better performance
+- Fix line endings in bin file
+
 ## 1.0.1 (November 6, 2019)
 
 Modified `scanFiles` function to return a list of file names where credit card numbers are found.
