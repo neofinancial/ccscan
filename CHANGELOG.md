@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 (December 10, 2019)
+
+- Changed `main` property in `package.json` to `build/index.js` to match the ncc build output.
+
 ## 1.0.2 (November 13, 2019)
 
 - Build with @zeit/ncc for better performance
