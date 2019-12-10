@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.4 (December 10, 2019)
+
+- When luhn-check is enabled, scanFile will now run a luhn check before flagging a file. Previously the luhn check only affected console output logic.
+- Upgrade to TypeScript 3.7.3.
+
 ## 1.0.3 (December 10, 2019)
 
 - Changed `main` property in `package.json` to `build/index.js` to match the ncc build output.
