@@ -9,7 +9,7 @@ const formatConsoleOutput = (consoleOutput: string[][]): string[] => {
 };
 
 beforeAll(() => {
-  consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  consoleLogSpy = jest.spyOn(console, 'log').mockImplementation();
 });
 
 afterAll(() => {
@@ -48,7 +48,7 @@ describe('TypeScript', () => {
     expect(
       await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', 'luhn-check': false })
     ).toEqual(['test/fixtures/typescript/bad.ts', 'test/fixtures/typescript/questionable.ts']);
-    expect(consoleLogSpy).toHaveBeenCalledTimes(23);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(24);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
@@ -96,7 +96,7 @@ describe('JavaScript', () => {
     expect(
       await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', 'luhn-check': false })
     ).toEqual(['test/fixtures/javascript/bad.js', 'test/fixtures/javascript/questionable.js']);
-    expect(consoleLogSpy).toHaveBeenCalledTimes(23);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(24);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 

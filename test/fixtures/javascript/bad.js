@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-unused-vars */
 
 // card number in a comment 5555554240233167
 // two card numbers in a comment 5555554240233167 1234123412341234

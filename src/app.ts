@@ -97,12 +97,14 @@ const scanFile = async (fileName: string, args: Args): Promise<boolean> => {
   if (matches && matches.length > 0) {
     !args.silent && (await showMatches(fileName, matches, args));
 
-    return true;
-  } else {
-    !args.silent && args.verbose && console.log(chalk.gray(fileName));
-
-    return false;
+    if (!args['luhn-check'] || matches.filter(luhn).length > 0) {
+      return true;
+    }
   }
+
+  !args.silent && args.verbose && console.log(chalk.gray(fileName));
+
+  return false;
 };
 
 const scanFiles = async (args: Args): Promise<string[]> => {

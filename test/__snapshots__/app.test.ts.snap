@@ -60,6 +60,7 @@ Array [
   "  10:37    warn     const cardNumberMultipleDashes = '1234--1234--1234--1234';",
   "  11:54    warn     const cardNumberInString = 'This is a card number: 1234123412341234';",
   "  12:43    warn     const cardNumberInStringNoSpaces = 'text1234123412341234text';",
+  "  13:33    warn     const cardNumberWithThrees = '3333333333333333';",
   undefined,
 ]
 `;
@@ -124,6 +125,7 @@ Array [
   "  10:37    warn     const cardNumberMultipleDashes = '1234--1234--1234--1234';",
   "  11:54    warn     const cardNumberInString = 'This is a card number: 1234123412341234';",
   "  12:43    warn     const cardNumberInStringNoSpaces = 'text1234123412341234text';",
+  "  13:33    warn     const cardNumberWithThrees = '3333333333333333';",
   undefined,
 ]
 `;
