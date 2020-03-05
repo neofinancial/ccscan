@@ -29,6 +29,14 @@ describe('TypeScript', () => {
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
+  test('card numbers are detected but excluded numbers are not included', async () => {
+    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', "exclude-numbers": ["5555554240233167"] })).toEqual([
+      'test/fixtures/typescript/bad.ts'
+    ]);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(0);
+    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
+  });
+
   test('card numbers are detected in silent mode', async () => {
     expect(
       await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', silent: true })
@@ -75,6 +83,14 @@ describe('JavaScript', () => {
     ]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(12);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
+  });
+
+  test('card numbers are detected but excluded numbers are not included', async () => {
+    expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' , "exclude-numbers": ["5555554240233167"] })).toEqual([
+      'test/fixtures/javascript/bad.js'
+    ]);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(0);
+    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
   });
 
   test('card numbers are detected in silent mode', async () => {

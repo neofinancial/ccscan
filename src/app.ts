@@ -12,6 +12,7 @@ export interface Args {
   'luhn-check'?: boolean;
   silent?: boolean;
   verbose?: boolean;
+  'exclude-numbers'?: string[]
 }
 
 const defaultArgs = {
@@ -19,10 +20,15 @@ const defaultArgs = {
   files: '**/*.{ts,js}',
   'luhn-check': true,
   silent: false,
-  verbose: false
+  verbose: false,
+  'exclude-numbers': []
 };
 
-const isCardNumber = (suspect: string): boolean => luhn(suspect.replace(/[\s-]+/g, ''));
+const isCardNumber = (suspect: string, excludedNumbers?: string[]): boolean => {
+  const trimmedSuspect = suspect.replace(/[\s-]+/g, '');
+
+  return luhn(trimmedSuspect) && !excludedNumbers?.includes(trimmedSuspect);
+}
 
 const showMatches = async (
   fileName: string,
@@ -43,7 +49,7 @@ const showMatches = async (
         if (line.match(new RegExp(`.*${match}.*`))) {
           const columnNumber = line.search(match) + 1;
 
-          if (args['luhn-check'] && isCardNumber(match)) {
+          if (args['luhn-check'] && isCardNumber(match, args['exclude-numbers'])) {
             error = true;
             outputLines.push(
               `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.red(
@@ -51,7 +57,7 @@ const showMatches = async (
               )} ${line.replace(match, chalk.red(match))}`
             );
           } else if (!args['luhn-check']) {
-            if (isCardNumber(match)) {
+            if (isCardNumber(match, args['exclude-numbers'])) {
               error = true;
               outputLines.push(
                 `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.red(
@@ -174,6 +180,11 @@ const run = async (): Promise<void> => {
     .option('verbose', {
       describe: 'show all scanned files',
       type: 'boolean'
+    })
+    .option('exclude-numbers', {
+      default: [],
+      describe: 'exclude certain numbers that might trigger',
+      type: 'array'
     })
     .conflicts('silent', 'verbose')
     .help().argv;
