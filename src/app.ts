@@ -21,7 +21,7 @@ const defaultArgs = {
   ignoreNumbers: [],
   luhnCheck: true,
   silent: false,
-  verbose: false,
+  verbose: false
 };
 
 const isCardNumber = (suspect: string, excludedNumbers?: string[]): boolean => {
