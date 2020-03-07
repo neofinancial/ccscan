@@ -24,10 +24,10 @@ const defaultArgs = {
   verbose: false
 };
 
-const isCardNumber = (suspect: string, excludedNumbers?: string[]): boolean => {
+const isCardNumber = (suspect: string, ignoreNumbers?: string[]): boolean => {
   const trimmedSuspect = suspect.replace(/[\s-]+/g, '');
 
-  return !excludedNumbers?.includes(trimmedSuspect) && luhn(trimmedSuspect);
+  return !ignoreNumbers?.includes(trimmedSuspect) && luhn(trimmedSuspect);
 }
 
 const showMatches = async (
@@ -168,7 +168,7 @@ const run = async (): Promise<void> => {
       describe: 'exclude pattern',
       type: 'array'
     })
-    .option('exclude-numbers', {
+    .option('ignore-numbers', {
       default: [],
       describe: 'ignore these numbers',
       type: 'array'
