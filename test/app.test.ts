@@ -29,7 +29,7 @@ describe('TypeScript', () => {
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
-  test('card numbers are detected but excluded numbers are not included', async () => {
+  test('card numbers are detected but ignored numbers are not included', async () => {
     expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5555554240233167"] })).toEqual([
       'test/fixtures/typescript/bad.ts'
     ]);
@@ -85,7 +85,7 @@ describe('JavaScript', () => {
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
-  test('card numbers are detected but excluded numbers are not included', async () => {
+  test('card numbers are detected but ignored numbers are not included', async () => {
     expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' , ignoreNumbers: ["5555554240233167"] })).toEqual([
       'test/fixtures/javascript/bad.js'
     ]);
