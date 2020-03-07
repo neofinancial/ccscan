@@ -30,7 +30,7 @@ describe('TypeScript', () => {
   });
 
   test('card numbers are detected but excluded numbers are not included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', "exclude-numbers": ["5555554240233167"] })).toEqual([
+    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5555554240233167"] })).toEqual([
       'test/fixtures/typescript/bad.ts'
     ]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
@@ -54,7 +54,7 @@ describe('TypeScript', () => {
 
   test('card-like numbers are detected when luhn check is disabled', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', 'luhn-check': false })
+      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', luhnCheck : false })
     ).toEqual(['test/fixtures/typescript/bad.ts', 'test/fixtures/typescript/questionable.ts']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(24);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
@@ -86,7 +86,7 @@ describe('JavaScript', () => {
   });
 
   test('card numbers are detected but excluded numbers are not included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' , "exclude-numbers": ["5555554240233167"] })).toEqual([
+    expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' , ignoreNumbers: ["5555554240233167"] })).toEqual([
       'test/fixtures/javascript/bad.js'
     ]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
@@ -110,7 +110,7 @@ describe('JavaScript', () => {
 
   test('card-like numbers are detected when luhn check is disabled', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', 'luhn-check': false })
+      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', luhnCheck: false })
     ).toEqual(['test/fixtures/javascript/bad.js', 'test/fixtures/javascript/questionable.js']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(24);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();

@@ -9,25 +9,25 @@ import lineReader from 'line-reader';
 export interface Args {
   exclude?: string[];
   files: string;
-  'luhn-check'?: boolean;
+  ignoreNumbers?: string[];
+  luhnCheck?: boolean;
   silent?: boolean;
   verbose?: boolean;
-  'exclude-numbers'?: string[]
 }
 
 const defaultArgs = {
   exclude: [],
   files: '**/*.{ts,js}',
-  'luhn-check': true,
+  ignoreNumbers: [],
+  luhnCheck: true,
   silent: false,
   verbose: false,
-  'exclude-numbers': []
 };
 
 const isCardNumber = (suspect: string, excludedNumbers?: string[]): boolean => {
   const trimmedSuspect = suspect.replace(/[\s-]+/g, '');
 
-  return luhn(trimmedSuspect) && !excludedNumbers?.includes(trimmedSuspect);
+  return !excludedNumbers?.includes(trimmedSuspect) && luhn(trimmedSuspect);
 }
 
 const showMatches = async (
@@ -49,15 +49,15 @@ const showMatches = async (
         if (line.match(new RegExp(`.*${match}.*`))) {
           const columnNumber = line.search(match) + 1;
 
-          if (args['luhn-check'] && isCardNumber(match, args['exclude-numbers'])) {
+          if (args.luhnCheck && isCardNumber(match, args.ignoreNumbers)) {
             error = true;
             outputLines.push(
               `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.red(
                 'error'.padEnd(6)
               )} ${line.replace(match, chalk.red(match))}`
             );
-          } else if (!args['luhn-check']) {
-            if (isCardNumber(match, args['exclude-numbers'])) {
+          } else if (!args.luhnCheck) {
+            if (isCardNumber(match, args.ignoreNumbers)) {
               error = true;
               outputLines.push(
                 `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.red(
@@ -79,7 +79,7 @@ const showMatches = async (
       }
 
       if (last) {
-        if ((!args.silent && outputLines.length > 0 && error) || (warning && !args['luhn-check'])) {
+        if ((!args.silent && outputLines.length > 0 && error) || (warning && !args.luhnCheck)) {
           console.log(fileName);
           console.log();
           outputLines.forEach((line: string): void => {
@@ -96,14 +96,14 @@ const showMatches = async (
 
 const scanFile = async (fileName: string, args: Args): Promise<boolean> => {
   const contents = fs.readFileSync(fileName, 'utf-8');
-  const matches = args['luhn-check']
+  const matches = args.luhnCheck
     ? contents.match(/\b[2-6]{1}\d{3}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\b/gm)
     : contents.match(/\b[1-9]{1}\d{3}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\b/gm);
 
   if (matches && matches.length > 0) {
     !args.silent && (await showMatches(fileName, matches, args));
 
-    if (!args['luhn-check'] || matches.filter(luhn).length > 0) {
+    if (!args.luhnCheck || matches.filter(luhn).length > 0) {
       return true;
     }
   }
@@ -168,6 +168,11 @@ const run = async (): Promise<void> => {
       describe: 'exclude pattern',
       type: 'array'
     })
+    .option('exclude-numbers', {
+      default: [],
+      describe: 'ignore these numbers',
+      type: 'array'
+    })
     .option('luhn-check', {
       default: true,
       describe: 'check if suspected card number passes the luhn check',
@@ -180,11 +185,6 @@ const run = async (): Promise<void> => {
     .option('verbose', {
       describe: 'show all scanned files',
       type: 'boolean'
-    })
-    .option('exclude-numbers', {
-      default: [],
-      describe: 'exclude certain numbers that might trigger',
-      type: 'array'
     })
     .conflicts('silent', 'verbose')
     .help().argv;

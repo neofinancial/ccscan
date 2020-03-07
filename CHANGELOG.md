@@ -2,7 +2,7 @@
 
 ## 1.0.5 (March 5, 2020)
 
-- added new optional argument `excluded-numbers` which can take in an array of numbers you wish to exclude from the scan
+-  Add `ignore-numbers` argument which takes an array of numbers you want to ignore
 
 ## 1.0.4 (December 10, 2019)
 
