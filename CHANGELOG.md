@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.0.5 (March 5, 2020)
+## 1.1.0 (March 9, 2020)
 
 -  Add `ignore-numbers` argument which takes an array of numbers you want to ignore
 
