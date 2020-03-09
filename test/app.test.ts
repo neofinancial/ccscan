@@ -29,6 +29,14 @@ describe('TypeScript', () => {
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
+  test('card numbers are detected but ignored numbers are not included', async () => {
+    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5555554240233167"] })).toEqual([
+      'test/fixtures/typescript/bad.ts'
+    ]);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(0);
+    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
+  });
+
   test('card numbers are detected in silent mode', async () => {
     expect(
       await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', silent: true })
@@ -46,7 +54,7 @@ describe('TypeScript', () => {
 
   test('card-like numbers are detected when luhn check is disabled', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', 'luhn-check': false })
+      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', luhnCheck : false })
     ).toEqual(['test/fixtures/typescript/bad.ts', 'test/fixtures/typescript/questionable.ts']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(24);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
@@ -77,6 +85,14 @@ describe('JavaScript', () => {
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
+  test('card numbers are detected but ignored numbers are not included', async () => {
+    expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' , ignoreNumbers: ["5555554240233167"] })).toEqual([
+      'test/fixtures/javascript/bad.js'
+    ]);
+    expect(consoleLogSpy).toHaveBeenCalledTimes(0);
+    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
+  });
+
   test('card numbers are detected in silent mode', async () => {
     expect(
       await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', silent: true })
@@ -94,7 +110,7 @@ describe('JavaScript', () => {
 
   test('card-like numbers are detected when luhn check is disabled', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', 'luhn-check': false })
+      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', luhnCheck: false })
     ).toEqual(['test/fixtures/javascript/bad.js', 'test/fixtures/javascript/questionable.js']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(24);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();

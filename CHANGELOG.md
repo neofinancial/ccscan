@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5 (March 5, 2020)
+
+-  Add `ignore-numbers` argument which takes an array of numbers you want to ignore
+
 ## 1.0.4 (December 10, 2019)
 
 - When `luhn-check` is enabled, `scanFile` will now run a luhn check before flagging a file. Previously the luhn check only affected console output logic.
