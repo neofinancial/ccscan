@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 (September 24, 2020)
+
+- The `ignore-numbers` argument is now properly interpreted as an array of strings
+- The `ignore-numbers` argument is now respected when scanning files.
+
 ## 1.1.0 (March 9, 2020)
 
 -  Add `ignore-numbers` argument which takes an array of numbers you want to ignore

@@ -103,7 +103,7 @@ const scanFile = async (fileName: string, args: Args): Promise<boolean> => {
   if (matches && matches.length > 0) {
     !args.silent && (await showMatches(fileName, matches, args));
 
-    if (!args.luhnCheck || matches.filter(luhn).length > 0) {
+    if (!args.luhnCheck || matches.filter(match => isCardNumber(match, args.ignoreNumbers)).length > 0) {
       return true;
     }
   }
@@ -171,7 +171,8 @@ const run = async (): Promise<void> => {
     .option('ignore-numbers', {
       default: [],
       describe: 'ignore these numbers',
-      type: 'array'
+      type: 'array',
+      string: true
     })
     .option('luhn-check', {
       default: true,
