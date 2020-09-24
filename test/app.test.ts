@@ -29,10 +29,8 @@ describe('TypeScript', () => {
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
-  test('card numbers are detected but ignored numbers are not included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5555554240233167"] })).toEqual([
-      'test/fixtures/typescript/bad.ts'
-    ]);
+  test('files with ignored card numbers are not included', async () => {
+    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5555554240233167"] })).toEqual([]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
   });
