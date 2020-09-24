@@ -11,6 +11,8 @@ const doSomething = () => {
   const cardNumberMultipleDashes = '5555--5542--4023--3167';
   const cardNumberInString = 'This is a card number: 5555554240233167';
   const cardNumberInStringNoSpaces = 'text5555554240233167text';
+
+  const secondCardNumberNoSpaces = '5411119998052468';
 };
 
 module.export = doSomething;

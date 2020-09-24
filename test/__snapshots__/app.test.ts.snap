@@ -13,6 +13,7 @@ Array [
   "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
   "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
   "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
+  "  15:37    error    const secondCardNumberNoSpaces = '5411119998052468';",
   undefined,
 ]
 `;
@@ -30,6 +31,7 @@ Array [
   "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
   "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
   "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
+  "  15:37    error    const secondCardNumberNoSpaces = '5411119998052468';",
   undefined,
   "test/fixtures/javascript/good.js",
   "test/fixtures/javascript/questionable.js",
@@ -49,6 +51,7 @@ Array [
   "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
   "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
   "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
+  "  15:37    error    const secondCardNumberNoSpaces = '5411119998052468';",
   undefined,
   "test/fixtures/javascript/questionable.js",
   undefined,
@@ -61,6 +64,23 @@ Array [
   "  11:54    warn     const cardNumberInString = 'This is a card number: 1234123412341234';",
   "  12:43    warn     const cardNumberInStringNoSpaces = 'text1234123412341234text';",
   "  13:33    warn     const cardNumberWithThrees = '3333333333333333';",
+  undefined,
+]
+`;
+
+exports[`JavaScript files with both ignored and non-ignored card numbers are included 1`] = `
+Array [
+  "test/fixtures/javascript/bad.js",
+  undefined,
+  "  3:29     error  // card number in a comment 5555554240233167",
+  "  4:34     error  // two card numbers in a comment 5555554240233167 1234123412341234",
+  "  7:31     error    const cardNumberNoSpaces = '5555554240233167';",
+  "  8:34     error    const cardNumberSingleSpace = '5555 5542 4023 3167';",
+  "  9:33     error    const cardNumberSingleDash = '5555-5542-4023-3167';",
+  "  10:37    error    const cardNumberMultipleSpaces = '5555  5542  4023  3167';",
+  "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
+  "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
+  "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
   undefined,
 ]
 `;
@@ -78,6 +98,7 @@ Array [
   "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
   "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
   "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
+  "  15:37    error    const secondCardNumberNoSpaces = '5411119998052468';",
   undefined,
 ]
 `;
@@ -95,6 +116,7 @@ Array [
   "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
   "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
   "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
+  "  15:37    error    const secondCardNumberNoSpaces = '5411119998052468';",
   undefined,
   "test/fixtures/typescript/good.ts",
   "test/fixtures/typescript/questionable.ts",
@@ -114,6 +136,7 @@ Array [
   "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
   "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
   "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
+  "  15:37    error    const secondCardNumberNoSpaces = '5411119998052468';",
   undefined,
   "test/fixtures/typescript/questionable.ts",
   undefined,
@@ -126,6 +149,23 @@ Array [
   "  11:54    warn     const cardNumberInString = 'This is a card number: 1234123412341234';",
   "  12:43    warn     const cardNumberInStringNoSpaces = 'text1234123412341234text';",
   "  13:33    warn     const cardNumberWithThrees = '3333333333333333';",
+  undefined,
+]
+`;
+
+exports[`TypeScript files with both ignored and non-ignored card numbers are included 1`] = `
+Array [
+  "test/fixtures/typescript/bad.ts",
+  undefined,
+  "  3:29     error  // card number in a comment 5555554240233167",
+  "  4:34     error  // two card numbers in a comment 5555554240233167 1234123412341234",
+  "  7:31     error    const cardNumberNoSpaces = '5555554240233167';",
+  "  8:34     error    const cardNumberSingleSpace = '5555 5542 4023 3167';",
+  "  9:33     error    const cardNumberSingleDash = '5555-5542-4023-3167';",
+  "  10:37    error    const cardNumberMultipleSpaces = '5555  5542  4023  3167';",
+  "  11:37    error    const cardNumberMultipleDashes = '5555--5542--4023--3167';",
+  "  12:54    error    const cardNumberInString = 'This is a card number: 5555554240233167';",
+  "  13:43    error    const cardNumberInStringNoSpaces = 'text5555554240233167text';",
   undefined,
 ]
 `;
