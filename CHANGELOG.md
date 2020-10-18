@@ -1,6 +1,7 @@
 # Changelog
 
 ## 1.1.2 (October 17, 2020)
+
 - Changed `node_modules` glob pattern to also exclude nested node_modules
 
 ## 1.1.1 (September 24, 2020)
