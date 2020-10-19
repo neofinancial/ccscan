@@ -118,7 +118,7 @@ const scanFiles = async (args: Args): Promise<string[]> => {
   const found = [];
 
   try {
-    const pattern = [mergedArgs.files, '!node_modules'];
+    const pattern = [mergedArgs.files, '!**/node_modules'];
 
     mergedArgs.exclude &&
       mergedArgs.exclude.forEach((exclude: string): void => {
