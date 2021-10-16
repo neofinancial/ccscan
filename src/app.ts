@@ -97,8 +97,8 @@ const showMatches = async (
 const scanFile = async (fileName: string, args: Args): Promise<boolean> => {
   const contents = fs.readFileSync(fileName, 'utf-8');
   const matches = args.luhnCheck
-    ? contents.match(/\b[2-6]{1}\d{3}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\b/gm)
-    : contents.match(/\b[1-9]{1}\d{3}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\b/gm);
+    ? contents.match(/\b[2-6]\d{3}(?:[\s-]*\d{4}){3}[\s-]*\b/gm)
+    : contents.match(/\b[1-9]\d{3}(?:[\s-]*\d{4}){3}[\s-]*\b/gm);
 
   if (matches && matches.length > 0) {
     !args.silent && (await showMatches(fileName, matches, args));
