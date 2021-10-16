@@ -45,7 +45,7 @@
     "@types/line-reader": "0.0.34",
     "@types/node": "16.11.0",
     "@types/yargs": "17.0.4",
-    "@vercel/ncc": "0.22.3",
+    "@vercel/ncc": "0.31.1",
     "chalk": "4.1.2",
     "eslint": "7.32.0",
     "eslint-config-neo": "0.6.2",
