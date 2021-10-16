@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3 (October 16, 2021)
+
+- Updated dependencies as per dependabot security issues. 
+
 ## 1.1.2 (October 17, 2020)
 
 - Changed `node_modules` glob pattern to also exclude nested node_modules
