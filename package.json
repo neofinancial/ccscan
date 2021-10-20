@@ -45,7 +45,7 @@
     "@types/line-reader": "0.0.34",
     "@types/node": "16.11.0",
     "@types/yargs": "17.0.4",
-    "@vercel/ncc": "0.31.1",
+    "@zeit/ncc": "^0.20.5",
     "chalk": "4.1.2",
     "eslint": "7.32.0",
     "eslint-config-neo": "0.6.2",
@@ -61,6 +61,6 @@
     "ts-jest": "26.5.5",
     "ts-node": "10.3.0",
     "typescript": "4.4.4",
-    "yargs": "17.2.1"
+    "yargs": "^14.2.0"
   }
 }
