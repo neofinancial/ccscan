@@ -2,7 +2,6 @@
 
 [![Build status](https://github.com/neofinancial/config-dug/workflows/CI/badge.svg)](https://github.com/neofinancial/ccscan/actions)
 ![TypeScript 3.5.3](https://img.shields.io/badge/TypeScript-3.5.3-brightgreen.svg)
-[![coverage](https://coverage.neotools.ca/api/badge/master/sU3MNGvvrQN9LyiFXr1uy3)](https://coverage.neotools.ca/coverage/neofinancial/ccscan)
 [![codecov.io](https://codecov.io/github/neofinancial/ccscan/coverage.svg)](https://codecov.io/github/neofinancial/ccscan)
 
 Scan files for credit card numbers
