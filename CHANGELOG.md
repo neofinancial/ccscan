@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.3 (July 1, 2024)
+
+- Bumped several dependencies with vulnerabilities
+
 ## 1.1.2 (October 17, 2020)
 
 - Changed `node_modules` glob pattern to also exclude nested node_modules
@@ -11,7 +15,7 @@
 
 ## 1.1.0 (March 9, 2020)
 
--  Add `ignore-numbers` argument which takes an array of numbers you want to ignore
+- Add `ignore-numbers` argument which takes an array of numbers you want to ignore
 
 ## 1.0.4 (December 10, 2019)
 
