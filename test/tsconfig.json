@@ -7,14 +7,24 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "target": "es6",
+    "target": "ES2021",
     "moduleResolution": "node",
     "outDir": "build",
     "baseUrl": ".",
-    "typeRoots": ["../src/types", "../node_modules/@types"],
+    "typeRoots": [
+      "../src/types",
+      "../node_modules/@types"
+    ],
     "paths": {
-      "*": ["*", "node_modules/*", "src/*"]
+      "*": [
+        "*",
+        "node_modules/*",
+        "src/*"
+      ]
     }
   },
-  "include": ["../src/**/*", "./**/*"]
+  "include": [
+    "../src/**/*",
+    "./**/*"
+  ]
 }
