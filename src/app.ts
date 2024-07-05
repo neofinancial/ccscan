@@ -21,19 +21,19 @@ const defaultArgs = {
   ignoreNumbers: [],
   luhnCheck: true,
   silent: false,
-  verbose: false
+  verbose: false,
 };
 
 const isCardNumber = (suspect: string, ignoreNumbers?: string[]): boolean => {
-  const trimmedSuspect = suspect.replace(/[\s-]+/g, '');
+  const trimmedSuspect = suspect.replaceAll(/[\s-]+/g, '');
 
   return !ignoreNumbers?.includes(trimmedSuspect) && luhn(trimmedSuspect);
-}
+};
 
 const showMatches = async (
   fileName: string,
   matches: RegExpMatchArray,
-  args: Args
+  args: Args,
 ): Promise<void> => {
   return new Promise((resolve): void => {
     const filePath = path.isAbsolute(fileName) ? fileName : path.join(process.cwd(), fileName);
@@ -46,30 +46,30 @@ const showMatches = async (
       lineNumber++;
 
       for (const match of matches) {
-        if (line.match(new RegExp(`.*${match}.*`))) {
+        if (new RegExp(`.*${match}.*`).test(line)) {
           const columnNumber = line.search(match) + 1;
 
           if (args.luhnCheck && isCardNumber(match, args.ignoreNumbers)) {
             error = true;
             outputLines.push(
               `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.red(
-                'error'.padEnd(6)
-              )} ${line.replace(match, chalk.red(match))}`
+                'error'.padEnd(6),
+              )} ${line.replace(match, chalk.red(match))}`,
             );
           } else if (!args.luhnCheck) {
             if (isCardNumber(match, args.ignoreNumbers)) {
               error = true;
               outputLines.push(
                 `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.red(
-                  'error'.padEnd(6)
-                )} ${line.replace(match, chalk.red(match))}`
+                  'error'.padEnd(6),
+                )} ${line.replace(match, chalk.red(match))}`,
               );
             } else {
               warning = true;
               outputLines.push(
                 `${chalk.gray(`${lineNumber}:${columnNumber}`.padEnd(8))} ${chalk.yellow(
-                  'warn'.padEnd(6)
-                )} ${line.replace(match, chalk.yellow(match))}`
+                  'warn'.padEnd(6),
+                )} ${line.replace(match, chalk.yellow(match))}`,
               );
             }
           }
@@ -95,15 +95,18 @@ const showMatches = async (
 };
 
 const scanFile = async (fileName: string, args: Args): Promise<boolean> => {
-  const contents = fs.readFileSync(fileName, 'utf-8');
+  const contents = fs.readFileSync(fileName, 'utf8');
   const matches = args.luhnCheck
-    ? contents.match(/\b[2-6]{1}\d{3}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\b/gm)
-    : contents.match(/\b[1-9]{1}\d{3}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\d{4}[\s-]*\b/gm);
+    ? contents.match(/\b[2-6]\d{3}(?:[\s-]*\d{4}){3}[\s-]*\b/gm)
+    : contents.match(/\b[1-9]\d{3}(?:[\s-]*\d{4}){3}[\s-]*\b/gm);
 
   if (matches && matches.length > 0) {
     !args.silent && (await showMatches(fileName, matches, args));
 
-    if (!args.luhnCheck || matches.filter(match => isCardNumber(match, args.ignoreNumbers)).length > 0) {
+    if (
+      !args.luhnCheck ||
+      matches.some((match) => isCardNumber(match, args.ignoreNumbers))
+    ) {
       return true;
     }
   }
@@ -154,38 +157,38 @@ const run = async (): Promise<void> => {
         yargs.positional('files', {
           default: '**/*.{ts,js}',
           describe: 'Files to scan',
-          type: 'string'
+          type: 'string',
         }),
       handler: async (args: Args): Promise<void> => {
         if ((await scanFiles(args)).length > 0) {
           process.exit(1);
         }
-      }
+      },
     })
     .demandCommand(1)
     .option('exclude', {
       default: [],
       describe: 'exclude pattern',
-      type: 'array'
+      type: 'array',
     })
     .option('ignore-numbers', {
       default: [],
       describe: 'ignore these numbers',
       type: 'array',
-      string: true
+      string: true,
     })
     .option('luhn-check', {
       default: true,
       describe: 'check if suspected card number passes the luhn check',
-      type: 'boolean'
+      type: 'boolean',
     })
     .option('silent', {
       describe: 'do not show any output',
-      type: 'boolean'
+      type: 'boolean',
     })
     .option('verbose', {
       describe: 'show all scanned files',
-      type: 'boolean'
+      type: 'boolean',
     })
     .conflicts('silent', 'verbose')
     .help().argv;

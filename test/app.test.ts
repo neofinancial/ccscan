@@ -23,36 +23,44 @@ afterEach(() => {
 describe('TypeScript', () => {
   test('card numbers are detected', async () => {
     expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}' })).toEqual([
-      'test/fixtures/typescript/bad.ts'
+      'test/fixtures/typescript/bad.ts',
     ]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(13);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
   test('files with ignored card numbers are not included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5555554240233167", "5411119998052468"] })).toEqual([]);
+    expect(
+      await scanFiles({
+        files: '**/test/fixtures/typescript/*.{ts,js}',
+        ignoreNumbers: ['5555554240233167', '5411119998052468'],
+      }),
+    ).toEqual([]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
-    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
+    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0);
   });
 
   test('files with both ignored and non-ignored card numbers are included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', ignoreNumbers: ["5411119998052468"] })).toEqual([
-      'test/fixtures/typescript/bad.ts'
-    ]);
+    expect(
+      await scanFiles({
+        files: '**/test/fixtures/typescript/*.{ts,js}',
+        ignoreNumbers: ['5411119998052468'],
+      }),
+    ).toEqual(['test/fixtures/typescript/bad.ts']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(12);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
   test('card numbers are detected in silent mode', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', silent: true })
+      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', silent: true }),
     ).toEqual(['test/fixtures/typescript/bad.ts']);
     expect(consoleLogSpy).not.toHaveBeenCalled();
   });
 
   test('card numbers are detected in verbose mode', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', verbose: true })
+      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', verbose: true }),
     ).toEqual(['test/fixtures/typescript/bad.ts']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(15);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
@@ -60,7 +68,7 @@ describe('TypeScript', () => {
 
   test('card-like numbers are detected when luhn check is disabled', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', luhnCheck : false })
+      await scanFiles({ files: '**/test/fixtures/typescript/*.{ts,js}', luhnCheck: false }),
     ).toEqual(['test/fixtures/typescript/bad.ts', 'test/fixtures/typescript/questionable.ts']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(25);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
@@ -75,8 +83,8 @@ describe('TypeScript', () => {
     expect(
       await scanFiles({
         files: '**/test/fixtures/typescript/*.{ts,js}',
-        exclude: ['test/fixtures/typescript']
-      })
+        exclude: ['test/fixtures/typescript'],
+      }),
     ).toEqual([]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
   });
@@ -85,36 +93,44 @@ describe('TypeScript', () => {
 describe('JavaScript', () => {
   test('card numbers are detected', async () => {
     expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' })).toEqual([
-      'test/fixtures/javascript/bad.js'
+      'test/fixtures/javascript/bad.js',
     ]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(13);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
   test('files with ignored card numbers are not included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}' , ignoreNumbers: ["5555554240233167", '5411119998052468'] })).toEqual([]);
+    expect(
+      await scanFiles({
+        files: '**/test/fixtures/javascript/*.{ts,js}',
+        ignoreNumbers: ['5555554240233167', '5411119998052468'],
+      }),
+    ).toEqual([]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
-    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0)
+    expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toHaveLength(0);
   });
 
   test('files with both ignored and non-ignored card numbers are included', async () => {
-    expect(await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', ignoreNumbers: ["5411119998052468"] })).toEqual([
-      'test/fixtures/javascript/bad.js'
-    ]);
+    expect(
+      await scanFiles({
+        files: '**/test/fixtures/javascript/*.{ts,js}',
+        ignoreNumbers: ['5411119998052468'],
+      }),
+    ).toEqual(['test/fixtures/javascript/bad.js']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(12);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
   });
 
   test('card numbers are detected in silent mode', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', silent: true })
+      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', silent: true }),
     ).toEqual(['test/fixtures/javascript/bad.js']);
     expect(consoleLogSpy).not.toHaveBeenCalled();
   });
 
   test('card numbers are detected in verbose mode', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', verbose: true })
+      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', verbose: true }),
     ).toEqual(['test/fixtures/javascript/bad.js']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(15);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
@@ -122,7 +138,7 @@ describe('JavaScript', () => {
 
   test('card-like numbers are detected when luhn check is disabled', async () => {
     expect(
-      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', luhnCheck: false })
+      await scanFiles({ files: '**/test/fixtures/javascript/*.{ts,js}', luhnCheck: false }),
     ).toEqual(['test/fixtures/javascript/bad.js', 'test/fixtures/javascript/questionable.js']);
     expect(consoleLogSpy).toHaveBeenCalledTimes(25);
     expect(formatConsoleOutput(consoleLogSpy.mock.calls)).toMatchSnapshot();
@@ -137,8 +153,8 @@ describe('JavaScript', () => {
     expect(
       await scanFiles({
         files: '**/test/fixtures/javascript/*.{ts,js}',
-        exclude: ['test/fixtures/javascript']
-      })
+        exclude: ['test/fixtures/javascript'],
+      }),
     ).toEqual([]);
     expect(consoleLogSpy).toHaveBeenCalledTimes(0);
   });

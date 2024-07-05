@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars,no-loss-of-precision */
 
 // not a card number in a comment 12555555424023316712334
 

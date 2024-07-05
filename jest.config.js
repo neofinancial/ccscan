@@ -4,14 +4,14 @@ module.exports = {
     '!<rootDir>/node_modules/',
     '!<rootDir>/build/',
     '!<rootDir>/dist/',
-    '!<rootDir>/*.js'
+    '!<rootDir>/*.js',
   ],
   globals: {
     'ts-jest': {
-      tsConfig: '<rootDir>/test/tsconfig.json'
-    }
+      tsConfig: '<rootDir>/test/tsconfig.json',
+    },
   },
   preset: 'ts-jest',
   testEnvironment: 'node',
-  testPathIgnorePatterns: ['<rootDir>/build/', '<rootDir>/dist/', '<rootDir>/config.*.js']
+  testPathIgnorePatterns: ['<rootDir>/build/', '<rootDir>/dist/', '<rootDir>/config.*.js'],
 };
