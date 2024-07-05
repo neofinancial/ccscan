@@ -13,7 +13,7 @@
     "url": "https://github.com/neofinancial/ccscan"
   },
   "engines": {
-    "node": ">=8.3.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "start": "./bin/ccscan.js",
