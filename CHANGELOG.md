@@ -1,8 +1,12 @@
 # Changelog
 
+## 1.2.1 (September 25, 2024)
+
+- yarn upgrade
+
 ## 1.2.0 (July 5, 2024)
 
-- npm audit fix
+- yarn upgrade
 - bumped node version required to 20
 - bumped manually other libraries
 
