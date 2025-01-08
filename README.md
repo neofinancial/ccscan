@@ -14,10 +14,6 @@ Scan files for credit card numbers
 
 You can also add `ccscan` to your project and set it up as a precommit hook that will block any commits that contain card numbers.
 
-#### Install Dependencies
-
-`yarn add --dev ccscan husky lint-staged` or `npm install -D ccscan husky lint-staged`
-
 #### Add to `package.json`
 
 ```json
@@ -38,17 +34,17 @@ You can also add `ccscan` to your project and set it up as a precommit hook that
 
 1. Fork this repo
 1. Clone the forked repo
-1. Install dependencies: `yarn`
+1. Install dependencies: `npm i`
 
 ### Building
 
-#### `yarn build`
+#### `npm run build`
 
-To clean the build directory run `yarn clean`
+To clean the build directory run `npm run clean`
 
 ### Running Tests
 
-#### `yarn test`
+#### `npm run test`
 
 ## Publishing
 

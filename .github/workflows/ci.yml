@@ -23,13 +23,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install
-        run: yarn --frozen-lockfile --prefer-offline --non-interactive
+        run: npm ci
       - name: Lint
-        run: yarn lint
+        run: npm run lint
       - name: Build
-        run: yarn build
+        run: npm run build
       - name: Test
-        run: yarn test -- --coverage
+        run: npm run test -- --coverage
       - name: Codecov
         uses: codecov/codecov-action@v1
         with:
